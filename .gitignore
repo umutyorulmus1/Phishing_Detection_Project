@@ -1,0 +1,21 @@
+.env
+__pycache__/
+venv/
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+*.model
+
+# Data & results
+data/
+models/
+*.csv
+*.png
+*.jpg
+*.jpeg
+
+# Logs & db
+*.db
+*.log

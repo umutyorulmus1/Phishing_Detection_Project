@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Detay</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<a href="/" style="display:inline-block;margin-bottom:15px;">← Geri</a>
+
+{% if post %}
+
+<h2>Metin</h2>
+<p>{{ post.text }}</p>
+
+<hr>
+
+<h3>Durum</h3>
+{% if post.status == "zararli" %}
+    <span class="dot red"></span> <strong>Zararlı</strong>
+{% elif post.status == "supheli" %}
+    <span class="dot orange"></span> <strong>Şüpheli</strong>
+{% endif %}
+
+<hr>
+
+<h3>Kurallar</h3>
+{% if post.rules %}
+<ul>
+    {% for r in post.rules %}
+        <li>{{ r }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Kural bilgisi yok</p>
+{% endif %}
+
+<hr>
+
+<h3>VirusTotal Özeti</h3>
+{% if post.vt %}
+<ul>
+    <li>Malicious: {{ post.vt.malicious }}</li>
+    <li>Suspicious: {{ post.vt.suspicious }}</li>
+    <li>Harmless: {{ post.vt.harmless }}</li>
+    <li>Undetected: {{ post.vt.undetected }}</li>
+    <li>Total: {{ post.vt.total }}</li>
+    <li>Verdict: {{ post.vt.verdict }}</li>
+</ul>
+{% else %}
+<p>VirusTotal verisi yok</p>
+{% endif %}
+
+<hr>
+
+<h3>İlgili URL’ler</h3>
+{% if post.urls %}
+<ul>
+    {% for u in post.urls %}
+        <li><a href="{{ u }}" target="_blank">{{ u }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>URL bulunamadı</p>
+{% endif %}
+
+{% else %}
+<p>Kayıt bulunamadı.</p>
+{% endif %}
+
+</body>
+</html>

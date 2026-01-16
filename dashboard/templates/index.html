@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+    <div>Toplam Veri: {{ total }} | Zararlı Veri: {{ flagged }}</div>
+
+    <div class="legend">
+        <span><span class="dot red"></span> Zararlı</span>
+        <span><span class="dot orange"></span> Şüpheli</span>
+    </div>
+</div>
+
+<div class="list">
+    {% for p in posts %}
+    <div class="row">
+        <div class="text">{{ p.text }}</div>
+
+        <div class="status">
+            {% if p.status == "zararli" %}
+                <span class="dot red"></span>
+            {% elif p.status == "supheli" %}
+                <span class="dot orange"></span>
+            {% endif %}
+        </div>
+
+        <div class="detail">
+            <a href="/detail/{{ p._id }}">›</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>
